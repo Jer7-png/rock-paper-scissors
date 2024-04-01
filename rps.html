@@ -6,6 +6,13 @@
     <title>Document</title>
 </head>
 <body>
+    <button id="rock">Rock</button>
+    <button id="paper">Paper</button>
+    <button id="scissors">Scissors</button>
+
+    <div class="container">
+
+    </div>
     <script>
         function getComputerChoice() {
             let rand = Math.floor(Math.random() * 3);
@@ -22,58 +29,109 @@
             }
         }
 
-        function play() {
+
+        const rockButton = document.querySelector("#rock");
+        const paperButton = document.querySelector("#paper");
+        const scissorsButton = document.querySelector("#scissors");
+        let playerScore = 0;
+        let computerScore = 0;
+
+        rockButton.addEventListener("click", function() {
             let computerSelection = getComputerChoice();
-            let playerSelection = prompt("Please input rock paper or scissors");
 
-            if (playerSelection === "rock") {
-                if (computerSelection === "rock") {
+            if (computerSelection === "rock") {
                     return "tie";
                 }
                 else if (computerSelection === "paper") {
+                    computerScore++;
+                    update("you lose");
                     return "you lose, paper beats rock";
+                    
                 }
                 else if (computerSelection === "scissors") {
+                    playerScore++;
+                    update("you win");
                     return "you win, rock beats scissors";
+                    
                 }
-            }
 
-            else if (playerSelection === "paper") {
-                if (computerSelection === "rock") {
+        }
+        );
+
+        paperButton.addEventListener("click", function() {
+            let computerSelection = getComputerChoice();
+
+            if (computerSelection === "rock") {
+                    playerScore++;
+                    update("you win");
                     return "you winm paper beats rock";
+                    
                 }
                 else if (computerSelection === "paper") {
                     return "tie";
                 }
                 else if (computerSelection === "scissors") {
+                    computerScore++;
+                    update("you lose");
                     return "you lose, scissors beat paper";
+                    
                 }
-            }
 
-            else if (playerSelection === "scissors") {
-                if (computerSelection === "rock") {
-                    return "you lose, rock beats scissors";
+        }
+        );
+
+        scissorsButton.addEventListener("click", function() {
+            let computerSelection = getComputerChoice();
+
+            if (computerSelection === "rock") {
+                    computerScore++;
+                    update("you lose");
+                    return;
+                    
                 }
                 else if (computerSelection === "paper") {
-                    return "you win, scissors beat paper";
+                    playerScore++;
+                    update("you win");
+                    return;
+                    
                 }
                 else if (computerSelection === "scissors") {
                     return "tie";
                 }
+        }
+        );
+
+        function update(result) {
+            if (playerScore < 5 && computerScore < 5) {
+                let container = document.querySelector(".container");
+
+                let content = document.createElement("div");
+                content.textContent = result + " " + "Player score: " + playerScore + " " + "Computer Score: " + computerScore;
+
+                container.appendChild(content);
+                print
+            }
+            else {
+                if (playerScore = 5) {
+
+                    let container = document.querySelector(".container");
+
+                    let content = document.createElement("div");
+                    content.textContent = "Player wins!";
+
+                    container.appendChild(content);
+                }
+                else {
+
+                    let container = document.querySelector(".container");
+
+                    let content = document.createElement("div");
+                    content.textContent = "Computer wins!";
+
+                    container.appendChild(content);
+                }
             }
         }
-
-        function playGame() {
-            let round = 0;
-
-            for (let i = 0; i < 5; i++) {
-                console.log("Round: " + i);
-                console.log(play());
-            }
-        }
-
-        playGame();
-       
     </script>
 </body>
 </html>
